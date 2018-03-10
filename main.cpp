@@ -30,13 +30,17 @@ int WINAPI WinMain(HINSTANCE /*hInstance*/, HINSTANCE /*hPrevInstance*/, LPSTR /
 		TCHAR dir[MAX_PATH];
 		GetCurrentDirectory(MAX_PATH, dir);
 		path = dir;
-		path = path + "/Super Mario 64 (USA).z64";	
+		path = path + "\\Super Mario 64 (USA).z64";
+		//MessageBox(NULL, path.c_str(), "Exception", MB_OK);
+		//CN64System::RunFileImage("C:/Users/justi/Desktop/Class files repo/Class-files-repo/C463 AI/Mario64AI/Super Mario 64 (USA).z64");
 		CN64System::RunFileImage(path.c_str());
+		
 	}
-	catch (...)
+	catch (const std::exception& e)
 	{
-		WriteTrace(TraceUserInterface, TraceError, "Exception caught (File: \"%s\" Line: %d)", __FILE__, __LINE__);
-		MessageBox(NULL, stdstr_f("Exception caught\nFile: %s\nLine: %d", __FILE__, __LINE__).c_str(), "Exception", MB_OK);
+	
+		string message = e.what();
+		MessageBox(NULL, message.c_str(), "Exception", MB_OK);
 	}
 
 	/*
